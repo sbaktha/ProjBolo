@@ -2,9 +2,9 @@
 %AND Q VALUES------
 clear all;
 clc;
-for aaaa=10:16
+for aaaa=1:9
     clearvars -except aaaa
-    fileno=strcat('0',num2str(aaaa));
+    fileno=strcat('00',num2str(aaaa));
     type='Corona';
     filename1=strcat('J:\Datasets\',type,'\',type,'File',fileno);
     data=xlsread(strcat(filename1,'-rawPQTIdata.xlsx'));
