@@ -2,10 +2,10 @@
 %AND Q VALUES------
 clear all;
 clc;
-for aaaa=10:16
+for aaaa=2:2
     clearvars -except aaaa
-    fileno=strcat('0',num2str(aaaa));
-    type='Corona';
+    fileno=strcat('00',num2str(aaaa));
+    type='EpoxyInternal';
     filename1=strcat('J:\Datasets\',type,'\',type,'File',fileno);
     data=xlsread(strcat(filename1,'-rawPQTIdata.xlsx'));
     siz=size(data);
@@ -141,17 +141,17 @@ for aaaa=10:16
     end
     
     %Below is the program for combining the max and min phi and q values obtained.
-%     [x y]=size(phimax);
-%     combinedfinal=zeros(x,4*x);
-%     for i=1:x
-%         for j=1:y
-%             combinedfinal(i,(4*j)-3)=phimax(i,j);
-%             combinedfinal(i,(4*j)-2)=qfinal(i,j);
-%             combinedfinal(i,(4*j)-1)=npulses(i,j);
-%             combinedfinal(i,(4*j))=ptifinal(i,j);
-%         end
-%     end
-%     
+    [x y]=size(phimax);
+    combinedfinal=zeros(x,4*x);
+    for i=1:x
+        for j=1:y
+            combinedfinal(i,(4*j)-3)=phimax(i,j);
+            combinedfinal(i,(4*j)-2)=qfinal(i,j);
+            combinedfinal(i,(4*j)-1)=npulses(i,j);
+            combinedfinal(i,(4*j))=ptifinal(i,j);
+        end
+    end
+    
 %     [Nsamp,wind]=size(combinedfinal);
 %     m=0;
 %     a=1;b=1;
