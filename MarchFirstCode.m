@@ -1,11 +1,12 @@
 clear all
 clc
-for mm=2:2
+
+for mm=1:1
     clc;
     clearvars -except mm ;
     PI=pi;
     fileno=strcat('00',num2str(mm));
-    type='Corona';
+    type='Internal';
     %phiqdata=xlsread(strcat('J:\Universita di Bologna\Papers for modification in code\venkatesh sir 4 feb files\data of epoxy double v\epoxy void_ac test.',fileno,'PQNDATA.xlsx'));
     phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNdataCorrectedNQavg30equaldata.xlsx'));
     %phiqdata=xlsread(strcat('J:\Datasets\Interne\InternalFile',fileno,'-PQNdata.xlsx'));
@@ -46,12 +47,12 @@ for mm=2:2
         end
     end
     
-    %
-%     MinDistClusteringMar1
-%     ClusterandSeparatedataMar1
-%     CreateObservSeqMar1
-%     InitStateAssignMar1
-%     InitModelHMMmar1
+    
+    MinDistClusteringMar1
+    ClusterandSeparatedataMar1
+    CreateObservSeqMar1
+    InitStateAssignMar1
+    InitModelHMMmar1
 %     StateSeqOptimMar1
 %     HMMTrainingMar1
 %     

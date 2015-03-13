@@ -1,7 +1,7 @@
 clear all;
 clc;
 
-for iii=3:3
+for iii=1:1
     clearvars -except iii
     fileno=strcat('00',num2str(iii));
     type='Internal';
@@ -53,7 +53,7 @@ for iii=3:3
                     end
                 end
                 qav(m,k)=qsu(m,k)/ floor(row/30);
-                noav(m,k)=nosu(m,k)/size(data,1);
+                noav(m,k)=nosu(m,k)/n(m,k);
             end
             m=m+1;
         end
@@ -76,7 +76,7 @@ for iii=3:3
         for j=1:72
             combinedfinal(i,(3*j)-2)=phi(1,j);
             combinedfinal(i,(3*j)-1)=qav(i,j);
-            combinedfinal(i,(3*j))=n(i,j);
+            combinedfinal(i,(3*j))=noav(i,j);
         end
     end
     xlswrite(strcat(filename1,'-PQNdataCorrectedNQavg30equaldata.xlsx'),combinedfinal);

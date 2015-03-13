@@ -21,14 +21,14 @@ sum1=zeros(K);
 p_v=zeros(N);
 status=zeros(1,N);
 nu=0.0;
-obiter=size(Ob,1);
+obiter=s777666ize(Ob,1);
 order=randperm(18,10);
 
-for xxx=1:10
+for xxx=1:1
     mlogprob(xxx)=0;
-   
+    Ob=Observ(order(xxx),:);
+    for yyy=1:1
         mlop(xxx,yyy)=0;
-        Ob=Observ(order(xxx,:));
         
         %Forward Algorithm
         for i=1:N
@@ -44,6 +44,7 @@ for xxx=1:10
                 Alpha(t+1,j)=sum0 * b(j,Ob(t+1));
             end
         end
+        
         %     disp('The forward matrix is:');
         %
         %     for i=1:T
@@ -88,26 +89,7 @@ for xxx=1:10
         for i=1:N
             ProbOgivenLbkwd(yyy)=ProbOgivenLbkwd(yyy)+Pi(i)*b(i,Ob(1))*Beta(1,i);
         end
-        
-        
-        %     %Viterbi for state optimization
-        %     for i=1:N
-        %         delta(1,i)=Pi(i)*b(i,Ob(1));
-        %         shi(1,i)=0;
-        %     end
-        %     for j=1:N
-        %         for t=2:T
-        %             delta(t,j)=(max(i,delta(t-1,i)*a(i,j)))*b(j,Ob(t));
-        %             shi(t,j)=argmax(i,delta(t-1,i)*a(i,j)));
-        %         end
-        %     end
-        %
-        %     ProbOandOS=max(i,delta(T,i));
-        %     xnew(T)=argmax(i,delta(T,i));
-        %
-        %     for t=T-1:-1:1
-        %         xnew(t)=shi(t+1,xnew(t+1));
-        %     end
+       
         
         %%%%%%%%%%%%%%%%%%%
         
@@ -143,44 +125,44 @@ for xxx=1:10
                 Gammanew(t,i)=Alpha(t,i)*Beta(t,i)/sum00;
             end
         end
-%         comp11=0;
-%         comp22=0;
-%         for t=1:T
-%             for i=1:N
-%                 [temp11,temp22]=max(Gammanew(t,i));
-%                 if temp11>comp11
-%                     comp11=temp11;
-%                     comp22=temp22;
-%                 end
-%             end
-%             likelystate(i)=comp22;
-%         end
-%         
-   % this is not right ^|^     
+        %         comp11=0;
+        %         comp22=0;
+        %         for t=1:T
+        %             for i=1:N
+        %                 [temp11,temp22]=max(Gammanew(t,i));
+        %                 if temp11>comp11
+        %                     comp11=temp11;
+        %                     comp22=temp22;
+        %                 end
+        %             end
+        %             likelystate(i)=comp22;
+        %         end
+        %
+        % this is not right ^|^
         
-       %Viterbi for state optim
-       for i=1:N
-           Delta(1,i)=Pi(i)*b(i,Ob(1));
-           Shi(1,i)=0;
-       end
-       for t=2:T
-           for j=1:N
-               for i=1:N
-                   tofindmax(i)=Delta(t-1,i)*a(i,j);
-               end
-               [Delta(t,j),Shi(t,j)]=max(tofindmax);
-               clear tofindmax;
-           end
-       end
-       for i=1:N
-           tofindmax(i)=Delta(T,i);
-       end
-       [Pnew,StatenewViter(T)]=max(tofindmax);
-       
-       for t=T-1:-1:1
-           StatenewViter(t)=Shi(t+1)*StatenewViter(t+1);
-       end
-       
+        %Viterbi for state optim
+        for i=1:N
+            Delta(1,i)=Pi(i)*b(i,Ob(1));
+            Shi(1,i)=0;
+        end
+        for t=2:T
+            for j=1:N
+                for i=1:N
+                    tofindmax(i)=Delta(t-1,i)*a(i,j);
+                end
+                [Delta(t,j),Shi(t,j)]=max(tofindmax);
+                clear tofindmax;
+            end
+        end
+        for i=1:N
+            tofindmax(i)=Delta(T,i);
+        end
+        [Pnew,StatenewViter(T)]=max(tofindmax);
+        
+        for t=T-1:-1:1
+            StatenewViter(t)=Shi(t+1)*StatenewViter(t+1);
+        end
+        
         %Gamma computation
         for t=1:T
             for i=1:N
@@ -232,6 +214,7 @@ for xxx=1:10
         for i=1:N
             E_Pi(i)= Gamma(1,i);
         end
+        
         for i=1:N
             for j=1:N
                 sum0=0;
@@ -312,7 +295,8 @@ for xxx=1:10
         disp('The status during the transition is:');
         disp(status);
         fprintf('\n');
-        
+        a=E_A;
+        b=E_B;
         %%%%%%
         mlop(xxx,yyy)=mlop(xxx,yyy)+ProbOgivenLbkwd(yyy);
     end

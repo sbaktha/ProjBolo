@@ -33,8 +33,10 @@ for iii=1:1
                     n(m,k)=n(m,k)+1;
                 end
             end
-            qav(m,k)=qsu(m,k)/size(data,1);
-            noav(m,k)=nosu(m,k)/size(data,1);
+            if n(m,k)~=0
+                qav(m,k)=qsu(m,k)/n(m,k);
+                noav(m,k)=nosu(m,k)/n(m,k);
+            end
         end
         m=m+1;
     else
@@ -52,8 +54,10 @@ for iii=1:1
                         n(m,k)=n(m,k)+1;
                     end
                 end
-                qav(m,k)=qsu(m,k)/ floor(row/30);
-                noav(m,k)=nosu(m,k)/n(m,k);
+                if n(m,k)~=0
+                    qav(m,k)=qsu(m,k)/ n(m,k);
+                    noav(m,k)=nosu(m,k)/n(m,k);
+                end
             end
             m=m+1;
         end
@@ -64,10 +68,15 @@ for iii=1:1
                 n(m,k)=0;
                 nosu(m,k)=0;
                 noav(m,k)=0;
+                if(q(i,k)~=0)
+                    n(m,k)=n(m,k)+1;
+                end
                 qsu(m,k)=qsu(m,k)+(q(i,k));
                 nosu(m,k)=nosu(m,k)+no(i,k);
-                qav(m,k)=qsu(m,k)/ (row-floor(row/30)*30);
-                noav(m,k)=nosu(m,k)/(row-floor(row/30)*30);
+                if n(m,k)~=0
+                    qav(m,k)=qsu(m,k)/n(m,k);
+                    noav(m,k)=nosu(m,k)/n(m,k);
+                end
                 m=m+1;
             end
         end
@@ -76,7 +85,7 @@ for iii=1:1
         for j=1:72
             combinedfinal(i,(3*j)-2)=phi(1,j);
             combinedfinal(i,(3*j)-1)=qav(i,j);
-            combinedfinal(i,(3*j))=noav(i,j);
+            combinedfinal(i,(3*j))=round(noav(i,j));
         end
     end
     xlswrite(strcat(filename1,'-PQNdataCorrectedNQavg30equaldata.xlsx'),combinedfinal);
