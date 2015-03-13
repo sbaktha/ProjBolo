@@ -52,7 +52,7 @@ for mm=1:1
     ClusterandSeparatedataMar1
     CreateObservSeqMar1
     InitStateAssignMar1
-    InitModelHMMmar1
+%    InitModelHMMmar1
 %     StateSeqOptimMar1
 %     HMMTrainingMar1
 %     

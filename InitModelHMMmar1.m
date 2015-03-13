@@ -1,4 +1,3 @@
-
 N=st;
 for i=1:N
     pii(i)=0;
