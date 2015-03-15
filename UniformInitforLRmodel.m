@@ -24,5 +24,28 @@ for i=1:N
     end
 end
 
-        
-                
+a=A;
+b=B;
+N = st;
+K = symb;
+sum0=0;
+Ob=zeros(size(Observ(1,:)));
+T=length(Ob);
+Beta=zeros(T,N);
+Alpha=zeros(T,N);
+ZI=zeros(T,N,N);
+Gamma=zeros(T,N);
+E_T=zeros(1,N);
+E_I_J=zeros(1,N);
+E_Pi=zeros(1,N);
+E_A=zeros(N,N);
+N_E_A=zeros(N,N);
+E_B=zeros(N,K);
+N_E_B=zeros(N,K);
+sum1=zeros(K);
+p_v=zeros(N);
+status=zeros(1,N);
+nu=0.0;
+obiter=size(Ob,1);
+order=randperm(18,10);
+
