@@ -1,4 +1,4 @@
-for yyy=1:25
+for yyy=1:looptimes
     mlop(xxx,yyy)=0;
     for i=1:N
         Alpha(1,i)=Pi(i) * b(i,Ob(1));

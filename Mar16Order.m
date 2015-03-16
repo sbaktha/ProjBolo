@@ -10,8 +10,8 @@ for iiii=1:1
     HMMCalcMar15;
     
     filenamemodel=strcat('Lambda',type,'file',num2str(fileno),'.mat');
-    save(filenamemodel,'Pi','N_E_A','N_E_B','mlop','mlogprob');
-    delay(5);
+    save(filenamemodel,'Pi','N_E_A','N_E_B','New_A','New_B','mlop','mlogprob');
+    %delay(5);
 end
 
 

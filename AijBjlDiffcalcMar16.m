@@ -1,7 +1,7 @@
-Num1A=zeros(N,N);
-Den1A=zeros(N,N);
-Num1B=zeros(N,N);
-Den1B=zeros(N,N);
+Num1A=zeros(1,NoOfOb);
+Den1A=zeros(1,NoOfOb);
+Num1B=zeros(1,NoOfOb);
+Den1B=zeros(1,NoOfOb);
 NN_E_A=zeros(N,N);
 New_A=zeros(N,N);
 New_B=zeros(N,K);
@@ -42,3 +42,16 @@ for i=1:N
         New_B(i,l)=sum(Num1B(:))/sum(Den1B(:));
     end
 end
+% counterb=zeros(1,N);
+% for i=1:N
+%     for j=1:K
+%         if New_B(i,j)==0
+%             counterb(i)=counterb(i)+1;
+%             New_B(i,j)=0.0001;
+%         end
+%     end
+% end
+% for i=1:N
+%     New_B(i,:)=New_B(i,:)/(sum(New_B(i,:))+counterb(i)*0.0001);
+% end
+
