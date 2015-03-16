@@ -67,7 +67,7 @@ for yyy=1:25
             end
         end
     end
-       
+    
     % Gamma alternate
     sum00=zeros(1,T);
     for t=1:T
@@ -170,6 +170,5 @@ for yyy=1:25
     mlop(xxx,yyy)=mlop(xxx,yyy)+ProbOgivenLbkwd(yyy);
     
     a=E_A;
-    b=E_B;    
+    b=E_B;
 end
-mlop(xxx,:)

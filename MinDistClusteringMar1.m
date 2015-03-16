@@ -3,7 +3,7 @@ z=0;
 ex = 18;
 %testdata(1:Nsamp,:) = phiqdata(1:Nsamp,:);
 
-PHIpmod=PHIp;
+PHIpmod=PHIp/360;
 
 for i=1:30
     kk=1;

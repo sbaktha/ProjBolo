@@ -13,7 +13,7 @@ end
 for i=1:N
     for j=1:N
         if j==i || j==i+1
-                A(i,j)=0.5;
+            A(i,j)=0.5;
         end
     end
 end

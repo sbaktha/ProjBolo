@@ -6,14 +6,6 @@ K = symb;
 sum0=0;
 Ob=zeros(size(Observ(1,:)));
 T=length(Ob);
-Beta=zeros(T,N);
-Alpha=zeros(T,N);
-ZI=zeros(T,N,N);
-Gamma=zeros(T,N);
-E_T=zeros(1,N);
-E_I_J=zeros(1,N);
-E_Pi=zeros(1,N);
-E_A=zeros(N,N);
 N_E_A=zeros(N,N);
 E_B=zeros(N,K);
 N_E_B=zeros(N,K);
@@ -24,12 +16,21 @@ nu=0.0;
 obiter=size(Ob,1);
 order=randperm(18,10);
 
-AijBjDiffcalcMar16;
 NoOfOb=10;
 for xxx=1:NoOfOb
+    Beta=zeros(T,N);
+    Alpha=zeros(T,N);
+    ZI=zeros(T,N,N);
+    Gamma=zeros(T,N);
+    E_T=zeros(1,N);
+    E_I_J=zeros(1,N);
+    E_Pi=zeros(1,N);
+    E_A=zeros(N,N);
     mlogprob(xxx)=0;
     Ob=Observ(order(xxx),:);
     SingleLoopCalcHMM;
+    Alphastore(xxx,:,:)=Alpha;
+    Betastore(xxx,:,:)=Beta;
     FinalProb(xxx)=ProbOgivenLfwd(end);
     mlogprob(xxx)=sum(log(mlop(xxx,:))/obiter);
     %Normalization
@@ -102,4 +103,8 @@ for xxx=1:NoOfOb
         end
         fprintf('\n');
     end
+    astore(xxx,:,:)=E_A;
+    bstore(xxx,:,:)=E_B;
 end
+
+AijBjlDiffcalcMar16;

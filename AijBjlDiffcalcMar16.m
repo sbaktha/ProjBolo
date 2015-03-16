@@ -10,21 +10,35 @@ NN_E_B=zeros(N,K);
 for i=1:N
     for j=1:N
         for kk=1:NoOfOb
-            sum0=zeros(1,T);
-            sum1=zeros(1,T);
+            Ob=Observ(order(kk),:);
+            sum0=0;
+            sum1=0;
             for t=1:T-1
-                sum0(t) = sum0(t) + (Alpha(t,i) *a(i,j) *b(j,Ob(t+1)) *Beta(t+1,j));
-                sum1(t)=sum1(t)+Alpha(t,i)*Beta(t,i);
+                sum0 = sum0 + (Alphastore(kk,t,i) *astore(kk,i,j) *bstore(kk,j,Ob(t+1)) *Betastore(kk,t+1,j));
+                sum1=sum1+Alphastore(kk,t,i)*Betastore(kk,t,i);
             end
-            Num1A(kk)=Num1A(kk)+sum(sum0(:));
-            Den1A(kk)=Den1A(kk)+sum(sum1(:));
-            
+            Num1A(kk)=(sum0)/FinalProb(kk);
+            Den1A(kk)=(sum1)/FinalProb(kk);
         end
+        New_A(i,j)=sum(Num1A(:))/sum(Den1A(:));
     end
 end
 
-
-
-if Ob(t)==L
-    sum2(t)=sum2(t)+Alpha(t,i)*Beta(t,i);
+for i=1:N
+    for l=1:K
+        for kk=1:NoOfOb
+            Ob=Observ(order(kk),:);
+            sum0=0;
+            sum1=0;
+            for t=1:T-1
+                if Ob(t)==l
+                    sum0=sum0+Alphastore(kk,t,i)*Betastore(kk,t,i);
+                end
+                sum1=sum1+Alphastore(kk,t,i)*Betastore(kk,t,i);
+            end
+            Num1B(kk)=sum0/FinalProb(kk);
+            Den1B(kk)=sum1/FinalProb(kk);
+        end
+        New_B(i,l)=sum(Num1B(:))/sum(Den1B(:));
+    end
 end
