@@ -44,10 +44,17 @@ for yyy=1:25
     kk=0;
     %Calculation of ZI values
     sum0=zeros(1,T);
+    sum1=zeros(1,T);
+    sum2=zeros(1,T);
+    
     for t=1:T-1
         for i=1:N
             for n=1:N
                 sum0(t) = sum0(t) + (Alpha(t,i) *a(i,n) *b(n,Ob(t+1)) *Beta(t+1,n));
+            end
+            sum1(t)=sum1(t)+Alpha(t,i)*Beta(t,i);
+            if Ob(t)==Testsymb
+                sum2(t)=sum2(t)+Alpha(t,i)*Beta(t,i);
             end
         end
     end
@@ -60,6 +67,7 @@ for yyy=1:25
             end
         end
     end
+       
     % Gamma alternate
     sum00=zeros(1,T);
     for t=1:T
