@@ -1,11 +1,9 @@
+cle
 iiii=2;
 fileno=strcat('00',num2str(iiii));
 type='Internal';
-
-%phiqdata=xlsread(strcat('J:\Universita di Bologna\Papers for modification in code\venkatesh sir 4 feb files\data of epoxy double v\epoxy void_ac test.',fileno,'PQNDATA.xlsx'));
 phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNTIdata.xlsx'));
 %%%%%%%%%%%phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNdataCorrectedNQavg30equaldata.xlsx'));
-%phiqdata=xlsread(strcat('J:\Datasets\Interne\InternalFile',fileno,'-PQNdata.xlsx'));
 symb=21;
 Nsamp=size(phiqdata,1);
 counter=0;
@@ -26,13 +24,7 @@ Qpampl=abs(Qp);
 zz=k-1;
 qsum=0;
 
-% for j=1:Nsamp
-%     qsum=qsum+sum(Qpampl(j,:));
-% end
-
-
 wind=72;
-%qavg=qsum/counter;
 for j=1:Nsamp
     for k=1:zz
         if max(Qpampl(j,:))~=0
@@ -44,12 +36,7 @@ for j=1:Nsamp
 end
 
 
-%MinDistClusteringMar1
-%NewMinDistClusteringlargeset
-% ClusterandSeparatedataMar1
-% CreateObservSeqMar1
-% InitStateAssignMar1
-%    InitModelHMMmar1
-%     StateSeqOptimMar1
-%     HMMTrainingMar1
-%
+New2MinDistClusteringMar17
+New3ClusterandSeparatedataMar17
+New4CreateObservSeqMar17
+New5InitStateAssignMar17
