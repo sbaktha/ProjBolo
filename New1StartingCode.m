@@ -1,14 +1,13 @@
-clear all;
-clc;
-iiii=2;
-fileno=strcat('00',num2str(iiii));
-type='EpoxyInternal';
-phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNTIdata.xlsx'));
+%clear all;
+% clc;
+% iiii=1;
+% fileno=strcat('00',num2str(iiii));
+% type='EpoxyInternal';
+% phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNTIdata.xlsx'));
 %%%%%%%%%%%phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNdataCorrectedNQavg30equaldata.xlsx'));
 symb=21;
 Nsamp=size(phiqdata,1);
 counter=0;
-
 for j=1:Nsamp
     k=1;
     for i=1:4:288
@@ -37,7 +36,7 @@ for j=1:Nsamp
 end
 
 
-New2MinDistClusteringMar17
+New2MinDistClusteringMar17;
 New3ClusterandSeparatedataMar17
 New4CreateObservSeqMar17
 New5InitStateAssignMar17

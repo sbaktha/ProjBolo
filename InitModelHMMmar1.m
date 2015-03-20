@@ -24,7 +24,9 @@ for i=1:N
         end
         te=sum(AA,2);
     end
-    A(i,:)=AA(i,:)/te(i);
+%     if(i<=j)
+        A(i,:)=AA(i,:)/te(i);
+%    end
 end
 
 for k=1:st
@@ -44,6 +46,12 @@ b2=zeros(size(sum0));
 sumstate1=sum(sumstate,2);
 for i=1:st
     b2(i,:)=sum0(i,:)/sumstate1(i);
+end
+b3=b2;
+b3(b3==0)=0.0001;
+
+for i=1:st
+        b3(i,:)=bsxfun(@rdivide,b3(i,:),sum(b3(i,:)));
 end
 
 %%%%------------Viterbi for state optimizxation ----------%%%%

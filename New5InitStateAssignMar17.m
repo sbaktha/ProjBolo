@@ -1,3 +1,4 @@
+
 %%check if i should use chi-means distance and not normal euclidean as the
 %%effect of PHI is more in the state assignment.
 st=4;
@@ -53,7 +54,7 @@ for k=1:ex
         end
         
     end
-    sumstate(:,k)=sum(sm1,2)
+    sumstate(:,k)=sum(sm1,2);
     ss(k,:)=temp1(1,:);
 end
 

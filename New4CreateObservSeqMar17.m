@@ -11,7 +11,7 @@ Qamplnew=abs(Qnew);
 for j=1:ex
     for k=1:zz
         if max(Qamplnew(j,:)~=0)
-            Qpmodnew(j,k)=Qnew(j,k)/max(Qamplnew(j,:));
+            Qpmodnew(j,k)=Qnew(j,k);
         else
             Qpmodnew(j,k)=0;
         end

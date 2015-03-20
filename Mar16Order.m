@@ -5,7 +5,7 @@ for iiii=1:1
     clearvars -except iiii ;
     fileno=strcat('00',num2str(iiii));
     type='Internal';
-    MarchFirstCode
+    New1StartingCode;
     UniformInitforLRmodel;
     HMMCalcMar15;
     

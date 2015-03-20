@@ -1,4 +1,6 @@
+looptimes=25;
 for yyy=1:looptimes
+    %b
     mlop(xxx,yyy)=0;
     for i=1:N
         Alpha(1,i)=Pi(i) * b(i,Ob(1));
@@ -13,7 +15,7 @@ for yyy=1:looptimes
             Alpha(t+1,j)=sum0 * b(j,Ob(t+1));
         end
     end
-    
+    %Alpha;
     ProbOgivenLfwd(yyy)=0;
     for i=1:N
         ProbOgivenLfwd(yyy)=ProbOgivenLfwd(yyy)+Alpha(T,i);
@@ -32,7 +34,7 @@ for yyy=1:looptimes
             Beta(t,i)=sum0;
         end
     end
-    
+    %Beta;
     
     ProbOgivenLbkwd(yyy)=0;
     for i=1:N
@@ -40,14 +42,14 @@ for yyy=1:looptimes
     end
     
     
-    
+    ZI=zeros(T,N,N);
     kk=0;
     %Calculation of ZI values
     sum0=zeros(1,T);
     for t=1:T-1
         for i=1:N
-            for n=1:N
-                sum0(t) = sum0(t) + (Alpha(t,i) *a(i,n) *b(n,Ob(t+1)) *Beta(t+1,n));
+            for j=1:N
+                sum0(t) = sum0(t) + (Alpha(t,i) *a(i,j) *b(j,Ob(t+1)) *Beta(t+1,j));
             end
         end
     end
@@ -61,15 +63,19 @@ for yyy=1:looptimes
         end
     end
     % Gamma alternate
-    sum00=zeros(1,T);
+%     sum00=zeros(1,T);
+%     for t=1:T
+%         for i=1:N
+%             sum00(t)=sum00(t)+Alpha(t,i)*Beta(t,i);
+%         end
+%     end
     for t=1:T
+        sum00=0;
         for i=1:N
-            sum00(t)=sum00(t)+Alpha(t,i)*Beta(t,i);
+            sum00=sum00+Alpha(t,i)*Beta(t,i);
         end
-    end
-    for t=1:T
         for i=1:N
-            Gammanew(t,i)=Alpha(t,i)*Beta(t,i)/sum00(t);
+            Gammanew(t,i)=Alpha(t,i)*Beta(t,i)/sum00;
         end
     end
     
@@ -94,17 +100,17 @@ for yyy=1:looptimes
     for t=T-1:-1:1
         StatenewViter(t)=Shi(t+1)*StatenewViter(t+1);
     end
-    
-    for t=1:T
-        for i=1:N
-            sum0=0;
-            for j=1:N
-                sum0 = sum0+ZI(t,i,j);
+
+        for t=1:T-1
+            for i=1:N
+                sum0=0;
+                for j=1:N
+                    sum0 = sum0+ZI(t,i,j);
+                end
+                Gamma(t,i)=sum0;
             end
-            Gamma(t,i)=sum0;
         end
-    end
-    
+
     
     Gamma(T,:)=Gammanew(T,:);
     
@@ -162,6 +168,10 @@ for yyy=1:looptimes
     mlop(xxx,yyy)=mlop(xxx,yyy)+ProbOgivenLbkwd(yyy);
     
     a=E_A;
-    b=E_B;    
+    b=E_B;
+    b(E_B==0)=0.0001;    
+    for i=1:4
+        b(i,:)=bsxfun(@rdivide,b(i,:),sum(b(i,:)));
+    end
 end
-mlop(xxx,:)
+%mlop(xxx,:);

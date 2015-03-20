@@ -1,10 +1,11 @@
+clear g;
 for i=1:ex
     for j=1:Nsamp
         eq_dist(j)=sqrt((w(i,:)-testdata(j,:))*((w(i,:)-testdata(j,:))'));
     end
     [temp,j1]=min(eq_dist);
     g(i,:)=testdata(j1,:);
-    j1
+    j1;
     % store the sample which is at a minimum distance
 end
 

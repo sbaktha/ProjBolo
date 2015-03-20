@@ -1,5 +1,5 @@
 clear b;
-b=B;
+b=b3;
 a=A;
 N = st;
 K = symb;
@@ -16,23 +16,25 @@ nu=0.0;
 obiter=size(Ob,1);
 %order=randperm(18,18);
 order=[1:18];
-NoOfOb=18;
+NoOfOb=1;
+looptimes=1;
 for xxx=1:NoOfOb
     Beta=zeros(T,N);
     Alpha=zeros(T,N);
     ZI=zeros(T,N,N);
     Gamma=zeros(T,N);
     E_T=zeros(1,N);
-    E_I_J=zeros(1,N);
+    E_I_J=zeros(N,N);
     E_Pi=zeros(1,N);
     E_A=zeros(N,N);
+    E_B=zeros(N,K);
     Ob=Observ(order(xxx),:);
     SingleLoopCalcHMM;
     %SingleLoopMar15DiffAB;
     Alphastore(xxx,:,:)=Alpha;
     Betastore(xxx,:,:)=Beta;
     FinalProb(xxx)=ProbOgivenLfwd(end);
-    mlogprob(xxx)=sum(log(mlop(xxx,:))/obiter);
+    %mlogprob(xxx)=sum(log(mlop(xxx,:))/obiter);
     %Normalization
     sum2 = 0;
     sum3 = 0;
@@ -106,10 +108,10 @@ for xxx=1:NoOfOb
     astore(xxx,:,:)=E_A;
     bstore(xxx,:,:)=E_B;
 end
-for i=1:looptimes
-    for j=1:NoOfOb
-        mlogprob(i)=mlogprob(i)+log(mlop(j,i))/18;
+mlogprob=zeros(1,looptimes);
+for j=1:looptimes
+    for i=1:NoOfOb
+        mlogprob(j)=mlogprob(j)+log(mlop(i,j))/ex;
     end
 end
-
 AijBjlDiffcalcMar16;
