@@ -2,10 +2,10 @@
 %AND Q VALUES------
 clear all;
 clc;
-for aaaa=1:1
+for aaaa=1:9
     clearvars -except aaaa
     fileno=strcat('00',num2str(aaaa));
-    type='Internal';
+    type='EpoxyInternal';
     filename1=strcat('J:\Datasets\',type,'\',type,'File',fileno);
     data=xlsread(strcat(filename1,'-rawPQTIdata.xlsx'));
     siz=size(data);
@@ -55,9 +55,26 @@ for aaaa=1:1
     for count=j:m
         if(count>d)
             if(app(count,1)<app(count-1,1))
-                phi=[phi;phiappend];
-                q=[q;qappend];
-                pti=[pti;ptiappend];
+                rowlimit=(0.02*(1+(360-data(count-1,1))/360));
+                if(data(count,3)-data(count-1,3))<=rowlimit
+                    phi=[phi;phiappend];
+                    q=[q;qappend];
+                    pti=[pti;ptiappend];
+                    phiappend=[1:360];
+                    qappend=zeros(1,360);
+                    ptiappend=zeros(1,360);
+                elseif(data(count,3)-data(count-1,3))>rowlimit
+                    rowlimit=rowlimit-(0.02*data(count-1,1)/360);
+                    while(rowlimit>0)
+                        phi=[phi;phiappend];
+                        q=[q;qappend];
+                        pti=[pti;ptiappend];
+                        rowlimit=rowlimit-0.02;
+                        phiappend=[1:360];
+                        qappend=zeros(1,360);
+                        ptiappend=zeros(1,360);
+                    end
+                end                
                 phiappend=[1:360];
                 qappend=zeros(1,360);
                 ptiappend=zeros(1,360);
@@ -71,27 +88,10 @@ for aaaa=1:1
             end
         end
     end
+    phi=[phi;phiappend];
+    q=[q;qappend];
+    pti=[pti;ptiappend];
     npulf=(q~=0);
-    
-    %All phi values are saved in 'phi' matrix and all q values are stored in
-    %'q' matrix to be accessed separately in order to ease the process of detecting
-    %peaks and differences
-%     [x y]=size(phi);
-%     y2=4*y;
-%     combined=zeros(x,y2);
-%     for i=1:x
-%         for j=1:y
-%             y2=4*y;
-%             combined(i,(4*j)-3)=phi(i,j);
-%             combined(i,(4*j)-2)=q(i,j);
-%             combined(i,(4*j)-1)=npulf(i,j);
-%             combined(i,(4*j))=pti(i,j);
-%         end
-%     end
-    % Above program combines the phi and q matrices to give one large matrix
-    % with phi and q values adjacent to each other.
-    
-    %-----TO FIND MAX AND MINIMUM VALUES-----
     
     n=5;
     loop=n;
@@ -139,39 +139,7 @@ for aaaa=1:1
             end
         end
     end
-    
-    %Below is the program for combining the max and min phi and q values obtained.
-%     [x y]=size(phimax);
-%     combinedfinal=zeros(x,4*x);
-%     for i=1:x
-%         for j=1:y
-%             combinedfinal(i,(4*j)-3)=phimax(i,j);
-%             combinedfinal(i,(4*j)-2)=qfinal(i,j);
-%             combinedfinal(i,(4*j)-1)=npulses(i,j);
-%             combinedfinal(i,(4*j))=ptifinal(i,j);
-%         end
-%     end
-%     
-%     [Nsamp,wind]=size(combinedfinal);
-%     m=0;
-%     a=1;b=1;
-%     for j=1:Nsamp
-%         k=1;
-%         for i=1:4:(wind-3)
-%             Qp(j,k)=combinedfinal(j,i+1);
-%             if(Qp(j,k)~=0)
-%                 qnew(1,a)=Qp(j,k);
-%                 a=a+1;
-%                 % b=b+1;
-%             end
-%             k=k+1;
-%         end
-%         m=m+k;
-%     end
-%     
-%     [c,d]=hist(qnew,unique(qnew));
-%     nop=[d;c];
-    
+        
     y=1;
     for i=1:72
         PQNTI(:,y)=phimax(:,i);
@@ -184,5 +152,5 @@ for aaaa=1:1
         y=y+1;
     end
     
-    xlswrite(strcat(filename1,'-PQNTIdata.xlsx'),PQNTI);
+    xlswrite(strcat(filename1,'-PQNTIdatacorrected.xlsx'),PQNTI);
 end

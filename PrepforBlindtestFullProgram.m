@@ -1,9 +1,13 @@
 clear all;
 clc;
-for iiii=1:9
+for iiii=1:20
     clc;
     clearvars -except iiii ;
-    fileno=strcat('00',num2str(iiii));
+    if iiii<10
+        fileno=strcat('00',num2str(iiii));
+    else
+        fileno=strcat('0',num2str(iiii));
+    end
     type='Surface';
     %%%%New1StartingCode;
     

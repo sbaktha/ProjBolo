@@ -1,9 +1,9 @@
 clear all;
 clc;
 
-iiii=9;
+iiii=1;
 fileno=strcat('00',num2str(iiii));
-type='Surface';
+type='Corona';
 phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNTIdata.xlsx'));
 Class=['Internal';'Surfacee';'Coronaaa'];
 New1StartingCode
@@ -13,7 +13,7 @@ New4CreateObservSeqMar17
 
 order=[1:18];
 NoOfOb=18;
-NoOfHmm=27;
+NoOfHmm=3;
 N = st;
 K = symb;
 T=size(Observ(1,:),2);
@@ -29,19 +29,14 @@ for xxx=1:NoOfOb
         E_Pi=zeros(1,N);
         E_A=zeros(N,N);
         E_B=zeros(N,K);
-        if yyy<=9
+        if yyy==1
             type='Internal';
-        elseif yyy>9 && yyy<=18
+        elseif yyy==2
             type='Surface';
-        elseif yyy>18 && yyy<=27
+        elseif yyy==3
             type='Corona';
         end
-        fileno=mod(yyy,9);
-        if fileno==0
-            fileno=9;
-        end
-        filenamemodel=strcat('Lambda',type,'file00',num2str(fileno),'.mat');
-        %filenamemodel=strcat('Lambda',num2str(yyy),'.mat');
+        filenamemodel=strcat('Lambda',type,'file',num2str(fileno),'.mat');
         load(filenamemodel);
         Pi=[1,0,0,0];
         a=New_A;
@@ -77,11 +72,11 @@ count1=0;
 count2=0;
 count3=0;
 for xxx=1:NoOfOb
-    if Index(xxx)<=9
+    if Index(xxx)==1
         count1=count1+1;
-    elseif Index(xxx)>9 && Index(xxx)<=18
+    elseif Index(xxx)==2
         count2=count2+1;
-    elseif Index(xxx)>18 && Index(xxx)<=27
+    elseif Index(xxx)==3
         count3=count3+1;
     end
 end
