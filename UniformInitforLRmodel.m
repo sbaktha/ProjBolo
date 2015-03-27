@@ -47,5 +47,5 @@ p_v=zeros(N);
 status=zeros(1,N);
 nu=0.0;
 obiter=size(Ob,1);
-order=randperm(18,10);
+%order=randperm(18,10);
 

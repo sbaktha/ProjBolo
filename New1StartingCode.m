@@ -1,9 +1,9 @@
-%clear all;
-% clc;
-% iiii=1;
-% fileno=strcat('00',num2str(iiii));
-% type='EpoxyInternal';
-% phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNTIdata.xlsx'));
+clear all;
+clc;
+iiii=1;
+fileno=strcat('00',num2str(iiii));
+type='EpoxyInternal';
+phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNTIdatacorrected.xlsx'));
 %%%%%%%%%%%phiqdata=xlsread(strcat('J:\Datasets\',type,'\',type,'File',fileno,'-PQNdataCorrectedNQavg30equaldata.xlsx'));
 symb=21;
 Nsamp=size(phiqdata,1);

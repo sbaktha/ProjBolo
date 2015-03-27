@@ -54,4 +54,7 @@ end
 % for i=1:N
 %     New_B(i,:)=New_B(i,:)/(sum(New_B(i,:))+counterb(i)*0.0001);
 % end
-
+New_B(New_B<0.0001)=[0.0001];
+for i=1:st
+    New_B(i,:)=bsxfun(@rdivide,New_B(i,:),sum(New_B(i,:)));
+end
